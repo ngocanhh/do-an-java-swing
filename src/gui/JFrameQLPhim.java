@@ -410,6 +410,7 @@ public class JFrameQLPhim extends javax.swing.JFrame {
     /**
      * @param args the command line arguments
      */
+    @SuppressWarnings("Convert2Lambda")
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -435,8 +436,12 @@ public class JFrameQLPhim extends javax.swing.JFrame {
         //</editor-fold>
 
         /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> {
-            new JFrameQLPhim().setVisible(true);
+        java.awt.EventQueue.invokeLater(new Runnable() {
+
+            @SuppressWarnings("override")
+            public void run() {
+                new JFrameQLPhim().setVisible(true);
+            }
         });
     }
 

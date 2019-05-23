@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
 import bus.UserBUS;
@@ -306,8 +305,8 @@ public class JFrameQLNhanVien extends javax.swing.JFrame {
             java.util.Date date = sdf.parse(txtNgaySinh.getText());
             java.sql.Date dateOfBirth = new java.sql.Date(date.getTime());
             userDTO.setDateOfBirth(dateOfBirth);
-            userDTO.setUserName("");
-            userDTO.setPassword("");
+            userDTO.setUserName(txtMaNhanVien.getText());
+            userDTO.setPassword("123456");
             UserBUS userBUS = new UserBUS();
             userDTO = userBUS.save(userDTO);
             if(userDTO != null){

@@ -59,7 +59,7 @@ public class JFrameQLGhe extends javax.swing.JFrame {
         jLabel1.setText("Quản lý thông tin ghế");
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jLabel2.setText("Mã vé: ");
+        jLabel2.setText("Mã ghế: ");
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
         jLabel3.setText("Loại ghế:");
@@ -95,7 +95,7 @@ public class JFrameQLGhe extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Id", "Mã ghế", "Tình trạng", "Loại ghế"
             }
         ) {
             boolean[] canEdit = new boolean [] {
