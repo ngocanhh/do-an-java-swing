@@ -8,6 +8,8 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import mapper.RowMapper;
 
+
+
 /**
  * Chứa các câu lệnh query, insert, update, delete
  * dùng chung cho các đối tượng của hệ thống
@@ -15,6 +17,7 @@ import mapper.RowMapper;
  * @author ADMIN
  * @param <T> Các class con khi kế thừa phải chỉ rõ đối tượng T 
  */
+
 public class AbstractDAO<T> {
     
     /**
