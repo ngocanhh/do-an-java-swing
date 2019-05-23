@@ -1,0 +1,105 @@
+CREATE TABLE loaighe(
+id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+maloaighe CHAR(10) NOT NULL,
+giave REAL
+)
+
+GO
+
+CREATE TABLE ghe(
+id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+maghe CHAR(10) NOT NULL,
+trangthai NVARCHAR(40),
+idloaighe BIGINT NOT NULL
+)
+
+GO
+
+CREATE TABLE ve (
+id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+mave CHAR(10) NOT NULL,
+idghe BIGINT NOT NULL,
+idlichchieu BIGINT NOT NULL,
+ngayban TIMESTAMP
+)
+
+GO
+
+CREATE TABLE users(
+id BIGINT NOT NULL PRIMARY KEY IDENTITY(1,1),
+roleid BIGINT NOT NULL,
+username VARCHAR(255) NOT NULL,
+password VARCHAR(255) NOT NULL,
+fullname VARCHAR(255),
+dateofbirth DATE,
+sex VARCHAR(20),
+address VARCHAR(255),
+phonenumber VARCHAR(20)
+)
+
+GO
+
+CREATE TABLE cachieu(
+id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+macachieu CHAR(10) NOT NULL,
+thoigian TIME
+)
+
+GO
+
+CREATE TABLE lichchieu(
+id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+malichchieu CHAR(10) NOT NULL,
+ngaychieu DATE,
+idcachieu BIGINT NOT NULL,
+idphong BIGINT NOT NULL,
+idphim BIGINT NOT NULL
+)
+
+GO
+
+CREATE TABLE phim(
+id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+maphim CHAR(10) NOT NULL,
+tenphim NVARCHAR(255),
+thoiluong int,
+hangsx NVARCHAR(255),
+theloai NVARCHAR(255),
+motangan NTEXT
+)
+
+GO
+
+CREATE TABLE phong(
+id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+maphong CHAR(10) NOT NULL,
+tenphong NVARCHAR(255),
+soghe1day int,
+soluongday int
+)
+
+GO
+
+CREATE TABLE role(
+id BIGINT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+name VARCHAR(255),
+code VARCHAR(20)
+)
+
+GO
+
+ALTER TABLE ghe
+ADD CONSTRAINT fk_ghe_idloaighe FOREIGN KEY(idloaighe) REFERENCES loaighe(id)
+
+GO
+
+ALTER TABLE ve
+ADD CONSTRAINT fk_ve_idghe FOREIGN KEY(idghe) REFERENCES ghe(id),
+CONSTRAINT fk_ve_idlichchieu FOREIGN KEY(idlichchieu) REFERENCES lichchieu(id)
+
+GO
+
+ALTER TABLE lichchieu
+ADD CONSTRAINT fk_lichchieu_idcachieu FOREIGN KEY(idcachieu) REFERENCES cachieu(id),
+CONSTRAINT fk_lichchieu_idphong FOREIGN KEY(idphong) REFERENCES phong(id),
+CONSTRAINT fk_lichchieu_idphim FOREIGN KEY(idphim) REFERENCES phim(id)
