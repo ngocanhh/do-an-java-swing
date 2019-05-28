@@ -22,7 +22,7 @@ public class MovieBUS {
     
     
     public long findIdMovie(String movieCode){
-        return movieDAO.findByMovieCode(movieCode).getId();
+        return movieDAO.findByCode(movieCode).getId();
     }
     
     public MovieDTO update(MovieDTO movie){
@@ -40,6 +40,6 @@ public class MovieBUS {
     }
     
     public MovieDTO findByCode(String movieCode){
-        return movieDAO.findByMovieCode(movieCode);
+        return movieDAO.findByCode(movieCode);
     }
 }

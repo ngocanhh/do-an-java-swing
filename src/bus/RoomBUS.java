@@ -8,6 +8,7 @@ package bus;
 
 import dao.RoomDAO;
 import dto.RoomDTO;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,7 +23,7 @@ public class RoomBUS {
         roomDAO = new RoomDAO();
     }
     
-    public long findIdByRoomCode(String roomCode){
+    public long findIdByCode(String roomCode){
         return roomDAO.findByCode(roomCode).getId();
     }
     
@@ -30,4 +31,7 @@ public class RoomBUS {
         return roomDAO.findById(id);
     }
     
+    public ArrayList<RoomDTO> findAll(){
+        return roomDAO.findAll();
+    }
 }

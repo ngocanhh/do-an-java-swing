@@ -40,4 +40,12 @@ public class ChairBUS {
         return chairDAO.findById(id);
     }
     
+    public ChairDTO update(ChairDTO chair){
+        chairDAO.update(chair);
+        return chairDAO.findById(chair.getId());
+    }
+    
+    public void delete(long id){
+        chairDAO.delete(id);
+    }
 }

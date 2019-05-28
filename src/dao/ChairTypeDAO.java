@@ -15,6 +15,11 @@ import java.util.ArrayList;
  */
 public class ChairTypeDAO extends AbstractDAO<ChairTypeDTO>{
     
+    public ChairTypeDTO findById(long id){
+        String sql = "SELECT * FROM chairtype WHERE id = ?";
+        return query(sql, ChairTypeDTO.class, id).get(0);
+    }
+    
     public ArrayList<ChairTypeDTO> findAll(){
         String sql = "SELECT * FROM chairtype";
         return query(sql, ChairTypeDTO.class);

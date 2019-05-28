@@ -311,10 +311,10 @@ public class JFrameQLLichChieu extends javax.swing.JFrame {
             String roomCode = cbPhongChieu.getSelectedItem().toString();
             String movieTimesCode = cbCaChieu.getSelectedItem().toString();
             showtimes.setMovieId(movieBUS.findIdMovie(movieCode));
-            showtimes.setRoomId(roomBUS.findIdByRoomCode(roomCode));
-            showtimes.setMovieTimesId(movieTimesBUS.findIdByMovieTimesCode(movieTimesCode));
+            showtimes.setRoomId(roomBUS.findIdByCode(roomCode));
+            showtimes.setMovieTimesId(movieTimesBUS.findIdByCode(movieTimesCode));
             ShowtimesBUS showtimesService = new ShowtimesBUS();
-            showtimes = showtimesService.insert(showtimes);
+            showtimes = showtimesService.save(showtimes);
             if(showtimes != null){
                 DefaultTableModel tableModel = (DefaultTableModel) jTable.getModel();
                 tableModel.addRow(new Object[]{showtimes.getShowTimesCode(), showtimes.getProjectionDate(),

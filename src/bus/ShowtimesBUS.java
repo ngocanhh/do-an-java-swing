@@ -23,7 +23,7 @@ public class ShowtimesBUS {
         showtimesDAO = new ShowtimesDAO();
     }
     
-    public ShowtimesDTO insert(ShowtimesDTO showtimes){
+    public ShowtimesDTO save(ShowtimesDTO showtimes){
         showtimes.setId(showtimesDAO.insert(showtimes));
         return showtimesDAO.findById(showtimes.getId());
     }

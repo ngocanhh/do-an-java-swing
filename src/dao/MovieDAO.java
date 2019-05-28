@@ -21,7 +21,7 @@ public class MovieDAO extends AbstractDAO<MovieDTO>{
         return query(sql, MovieDTO.class);
     }
     
-    public MovieDTO findByMovieCode(String moviecode){
+    public MovieDTO findByCode(String moviecode){
         String sql = "SELECT * FROM movie WHERE moviecode = ?";
         ArrayList<MovieDTO> listMovie = query(sql, MovieDTO.class, moviecode);
         return listMovie.isEmpty()? null : listMovie.get(0);
@@ -39,4 +39,5 @@ public class MovieDAO extends AbstractDAO<MovieDTO>{
         String sql = "DELETE FROM movie WHERE id = ?";
         update(sql, id);
     }
+    
 }

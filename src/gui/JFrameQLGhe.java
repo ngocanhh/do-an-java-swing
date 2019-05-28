@@ -3,21 +3,28 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package gui;
 
 import bus.ChairBUS;
 import bus.ChairTypeBUS;
 import dto.ChairDTO;
+import dto.ChairTypeDTO;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author ADMIN
  */
 public class JFrameQLGhe extends javax.swing.JFrame {
-
+    
+    @SuppressWarnings("FieldMayBeFinal")
+    private ChairTypeBUS chairTypeBUS = new ChairTypeBUS();
+    @SuppressWarnings("FieldMayBeFinal")
+    private ChairBUS chairBUS = new ChairBUS();
+    
     /**
      * Creates new form JFrameQLGhe
      */
@@ -44,11 +51,11 @@ public class JFrameQLGhe extends javax.swing.JFrame {
         rdSuDung = new javax.swing.JRadioButton();
         rdKhongSuDung = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        jTable = new javax.swing.JTable();
+        btThem = new javax.swing.JButton();
+        btCapNhat = new javax.swing.JButton();
+        btXoa = new javax.swing.JButton();
+        btThoat = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Quản lý thông tin ghế");
@@ -88,9 +95,9 @@ public class JFrameQLGhe extends javax.swing.JFrame {
         rdKhongSuDung.setText("Không sử dụng được");
         rdKhongSuDung.setToolTipText("");
 
-        jTable1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jTable1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        jTable.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jTable.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -106,27 +113,42 @@ public class JFrameQLGhe extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTableMouseClicked(evt);
+            }
+        });
+        jScrollPane1.setViewportView(jTable);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Thêm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btThem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btThem.setText("Thêm");
+        btThem.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btThemActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Cập nhật");
-
-        jButton3.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton3.setText("Xóa");
-
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton4.setText("Thoát");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
+        btCapNhat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btCapNhat.setText("Cập nhật");
+        btCapNhat.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
+                btCapNhatActionPerformed(evt);
+            }
+        });
+
+        btXoa.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btXoa.setText("Xóa");
+        btXoa.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btXoaActionPerformed(evt);
+            }
+        });
+
+        btThoat.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btThoat.setText("Thoát");
+        btThoat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btThoatActionPerformed(evt);
             }
         });
 
@@ -148,13 +170,13 @@ public class JFrameQLGhe extends javax.swing.JFrame {
                         .addComponent(rdKhongSuDung))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(216, 216, 216)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btThem, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 118, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(54, 54, 54)
-                        .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(50, 50, 50)
-                        .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(73, 73, 73)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -194,10 +216,10 @@ public class JFrameQLGhe extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(btThoat, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btXoa, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btCapNhat, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btThem, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(55, 55, 55))))
         );
 
@@ -212,32 +234,82 @@ public class JFrameQLGhe extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_rdSuDungActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void btThoatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThoatActionPerformed
         // TODO add your handling code here:
         this.setVisible(false);
-    }//GEN-LAST:event_jButton4ActionPerformed
+    }//GEN-LAST:event_btThoatActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        ChairDTO chairDTO = new ChairDTO();
-        ChairTypeBUS chairTypeBUS = new ChairTypeBUS();
-        ChairBUS chairBUS = new ChairBUS();
-        chairDTO.setChairCode(txtMaVe.getText());
+    public void setValue(ChairDTO chair){
+        chair.setChairCode(txtMaVe.getText());
         String chairTypeCode = cbLoaiGhe.getSelectedItem().toString();
-        chairDTO.setChairTypeId(chairTypeBUS.findIdByCode(chairTypeCode));
+        chair.setChairTypeId(chairTypeBUS.findIdByCode(chairTypeCode));
         if(rdSuDung.isSelected()){
-            chairDTO.setStatus("Sử dụng được");
+            chair.setStatus("Sử dụng được");
         }else if(rdKhongSuDung.isSelected()){
-            chairDTO.setStatus("Không sử dụng được");
+            chair.setStatus("Không sử dụng được");
         }
-        chairDTO = chairBUS.save(chairDTO);
-        if(chairDTO != null){
-            JOptionPane.showMessageDialog(rootPane, "Thêm ghế thành công");
+    }
+    
+    private void btThemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btThemActionPerformed
+        // TODO add your handling code here:
+        ChairDTO chair = new ChairDTO();
+        setValue(chair);
+        chair = chairBUS.save(chair);
+        if(chair != null){
+            ChairTypeDTO chairType = chairTypeBUS.findById(chair.getChairTypeId());
+            DefaultTableModel tableModel = (DefaultTableModel) jTable.getModel();
+            tableModel.addRow(new Object[]{chair.getId(),chair.getChairCode(),
+            chair.getStatus(),chairType.getChairTypeCode()});
         }else{
             JOptionPane.showMessageDialog(rootPane, "Không thành công");
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+        reset();
+    }//GEN-LAST:event_btThemActionPerformed
 
+    private void btCapNhatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btCapNhatActionPerformed
+        // TODO add your handling code here:
+        ChairDTO chair = new ChairDTO();
+        chair.setId((long)jTable.getValueAt(jTable.getSelectedRow(), 0));
+        setValue(chair);
+        chair = chairBUS.update(chair);
+        if(chair != null){
+            int indexRow = jTable.getSelectedRow();
+            jTable.setValueAt(chair.getChairCode(), indexRow, 1);
+            jTable.setValueAt(chair.getStatus(), indexRow, 2);
+            ChairTypeDTO chairType = chairTypeBUS.findById(chair.getChairTypeId());
+            jTable.setValueAt(chairType.getChairTypeCode(), indexRow, 3);
+        }
+        reset();
+    }//GEN-LAST:event_btCapNhatActionPerformed
+
+    private void jTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTableMouseClicked
+        // TODO add your handling code here:
+        int indexRow = jTable.getSelectedRow();
+        txtMaVe.setText((String)jTable.getValueAt(indexRow, 1));
+        String tinhTrang = (String)jTable.getValueAt(indexRow, 2);
+        if(tinhTrang.equals("Sử dụng được")){
+            rdSuDung.setSelected(true);
+        }else{
+            rdKhongSuDung.setSelected(true);
+        }
+        cbLoaiGhe.setSelectedItem(jTable.getValueAt(indexRow, 3));
+    }//GEN-LAST:event_jTableMouseClicked
+
+    private void btXoaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXoaActionPerformed
+        // TODO add your handling code here:
+        long id = (long)jTable.getValueAt(jTable.getSelectedRow(), 0);
+        chairBUS.delete(id);
+        DefaultTableModel tableModel = (DefaultTableModel) jTable.getModel();
+        tableModel.removeRow(jTable.getSelectedRow());
+        reset();
+    }//GEN-LAST:event_btXoaActionPerformed
+
+    public void reset(){
+        txtMaVe.setText("");
+        cbLoaiGhe.setSelectedIndex(0);
+        rdSuDung.setSelected(true);
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -283,19 +355,23 @@ public class JFrameQLGhe extends javax.swing.JFrame {
         this.cbLoaiGhe = cbLoaiGhe;
     }
 
+    public JTable getjTable() {
+        return jTable;
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btCapNhat;
+    private javax.swing.JButton btThem;
+    private javax.swing.JButton btThoat;
+    private javax.swing.JButton btXoa;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox cbLoaiGhe;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable;
     private javax.swing.JRadioButton rdKhongSuDung;
     private javax.swing.JRadioButton rdSuDung;
     private javax.swing.JTextField txtMaVe;

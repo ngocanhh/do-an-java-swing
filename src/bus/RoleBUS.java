@@ -25,4 +25,5 @@ public class RoleBUS {
     public RoleDTO findById(long id){
         return roleDAO.findById(id);
     }
+    
 }

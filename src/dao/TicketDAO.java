@@ -31,4 +31,11 @@ public class TicketDAO extends AbstractDAO<TicketDTO>{
         String sql = "SELECT * FROM ticket";
         return query(sql, TicketDTO.class);
     }
+    
+    public TicketDTO findByChairIdAndShowtimesId(long chairId, long showtimesId){
+        String sql = "SELECT * FROM ticket WHERE chairid = ? AND showtimesid = ?";
+        ArrayList<TicketDTO> tickets = query(sql, TicketDTO.class, chairId, showtimesId);
+        return tickets.isEmpty()? null : tickets.get(0);
+    }
+    
 }

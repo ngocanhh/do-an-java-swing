@@ -8,6 +8,7 @@ package bus;
 
 import dao.MovieTimesDAO;
 import dto.MovieTimesDTO;
+import java.util.ArrayList;
 
 /**
  *
@@ -22,7 +23,7 @@ public class MovieTimesBUS {
         movieTimesDAO = new MovieTimesDAO();
     }
     
-    public long findIdByMovieTimesCode(String movieTimesCode){
+    public long findIdByCode(String movieTimesCode){
         return movieTimesDAO.findByMovieTimesCode(movieTimesCode).getId();
     }
     
@@ -30,4 +31,7 @@ public class MovieTimesBUS {
         return movieTimesDAO.findById(id);
     }
     
+    public ArrayList<MovieTimesDTO> findAll(){
+        return movieTimesDAO.findAll();
+    }
 }

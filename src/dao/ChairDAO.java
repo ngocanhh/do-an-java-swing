@@ -37,4 +37,18 @@ public class ChairDAO extends AbstractDAO<ChairDTO>{
         return listChair.isEmpty()? null : listChair.get(0);
     }
     
+    
+    public void update(ChairDTO chair){
+        StringBuilder sql = new StringBuilder();
+        sql.append("UPDATE chair SET chaircode = ?, status = ?, ");
+        sql.append("chairtypeid = ? WHERE id = ?");
+        update(sql.toString(), chair.getChairCode(), chair.getStatus(),
+                chair.getChairTypeId(), chair.getId());
+    }
+    
+    public void delete(long id){
+        String sql = "DELETE FROM chair WHERE id = ?";
+        update(sql, id);
+    }
+    
 }

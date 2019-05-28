@@ -34,6 +34,15 @@ import javax.swing.table.DefaultTableModel;
  */
 public class JFrameMainNv extends javax.swing.JFrame {
 
+    private ChairBUS chairBUS = new ChairBUS();
+    private ShowtimesBUS showtimesBUS = new ShowtimesBUS();
+    private UserBUS userBUS = new UserBUS();
+    private TicketBUS ticketBUS = new TicketBUS();
+    private ChairTypeBUS chairTypeBUS = new ChairTypeBUS();
+    private RoomBUS roomBUS = new RoomBUS();
+    private MovieBUS movieBUS = new MovieBUS();
+    private MovieTimesBUS movieTimesBUS = new MovieTimesBUS();
+    
     /**
      * Creates new form JFrameMain
      */
@@ -53,13 +62,13 @@ public class JFrameMainNv extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jPanelQLThongTin = new javax.swing.JPanel();
-        jButton5 = new javax.swing.JButton();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btPhim = new javax.swing.JButton();
+        btLichChieu = new javax.swing.JButton();
+        btGhe = new javax.swing.JButton();
+        btQuanLyThongTin = new javax.swing.JButton();
+        btXemLichChieu = new javax.swing.JButton();
         btBanVe = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
+        btTimKiem = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Chương trình quản lý bán vé xem phim");
@@ -71,27 +80,27 @@ public class JFrameMainNv extends javax.swing.JFrame {
 
         jPanelQLThongTin.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
-        jButton5.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton5.setText("Phim");
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
+        btPhim.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btPhim.setText("Phim");
+        btPhim.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton5ActionPerformed(evt);
+                btPhimActionPerformed(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton6.setText("Lịch chiếu");
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
+        btLichChieu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btLichChieu.setText("Lịch chiếu");
+        btLichChieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton6ActionPerformed(evt);
+                btLichChieuActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton7.setText("Ghế");
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
+        btGhe.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btGhe.setText("Ghế");
+        btGhe.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton7ActionPerformed(evt);
+                btGheActionPerformed(evt);
             }
         });
 
@@ -101,11 +110,11 @@ public class JFrameMainNv extends javax.swing.JFrame {
             jPanelQLThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanelQLThongTinLayout.createSequentialGroup()
                 .addGap(38, 38, 38)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btPhim, javax.swing.GroupLayout.PREFERRED_SIZE, 168, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(108, 108, 108)
-                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btLichChieu, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(115, 115, 115)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btGhe, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(43, Short.MAX_VALUE))
         );
         jPanelQLThongTinLayout.setVerticalGroup(
@@ -113,25 +122,25 @@ public class JFrameMainNv extends javax.swing.JFrame {
             .addGroup(jPanelQLThongTinLayout.createSequentialGroup()
                 .addGap(82, 82, 82)
                 .addGroup(jPanelQLThongTinLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                    .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
-                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btGhe, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(btLichChieu, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                    .addComponent(btPhim, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(129, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton1.setText("Quản lý thông tin");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btQuanLyThongTin.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btQuanLyThongTin.setText("Quản lý thông tin");
+        btQuanLyThongTin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btQuanLyThongTinActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton2.setText("Xem lịch chiếu");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btXemLichChieu.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btXemLichChieu.setText("Xem lịch chiếu");
+        btXemLichChieu.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btXemLichChieuActionPerformed(evt);
             }
         });
 
@@ -143,8 +152,8 @@ public class JFrameMainNv extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
-        jButton4.setText("Tìm kiếm");
+        btTimKiem.setFont(new java.awt.Font("Tahoma", 0, 18)); // NOI18N
+        btTimKiem.setText("Tìm kiếm");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -159,13 +168,13 @@ public class JFrameMainNv extends javax.swing.JFrame {
                         .addGap(181, 181, 181)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jButton1)
+                                .addComponent(btQuanLyThongTin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton2)
+                                .addComponent(btXemLichChieu)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(btBanVe)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jButton4))
+                                .addComponent(btTimKiem))
                             .addComponent(jPanelQLThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(152, Short.MAX_VALUE))
         );
@@ -176,10 +185,10 @@ public class JFrameMainNv extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(159, 159, 159)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2)
+                    .addComponent(btQuanLyThongTin)
+                    .addComponent(btXemLichChieu)
                     .addComponent(btBanVe)
-                    .addComponent(jButton4))
+                    .addComponent(btTimKiem))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanelQLThongTin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(161, Short.MAX_VALUE))
@@ -188,89 +197,21 @@ public class JFrameMainNv extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btXemLichChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btXemLichChieuActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        JFrameQLLichChieu jFrameQLLichChieu = new JFrameQLLichChieu();
-        MovieTimesDAO movieTimesDAO = new MovieTimesDAO();
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        for(MovieTimesDTO m : movieTimesDAO.findAll()){
-            model.addElement(m.getMovieTimesCode());
-        }
-        jFrameQLLichChieu.getCaChieu().setModel(model);
-        DefaultComboBoxModel model1 = new DefaultComboBoxModel();
-        MovieDAO movieDAO = new MovieDAO();
-        for(MovieDTO movie : movieDAO.findAll()){
-            model1.addElement(movie.getMovieCode());
-        }
-        jFrameQLLichChieu.getCbPhim().setModel(model1);
         
-        DefaultComboBoxModel model2 = new DefaultComboBoxModel();
-        RoomDAO roomDAO = new RoomDAO();
-        for(RoomDTO room : roomDAO.findAll()){
-            model2.addElement(room.getRoomCode());
-        }
-        jFrameQLLichChieu.getCbRoom().setModel(model2);
-        DefaultTableModel tableModel = (DefaultTableModel) jFrameQLLichChieu.getjTable().getModel();
-        ShowtimesBUS showtimesBUS = new ShowtimesBUS();
-        ArrayList<ShowtimesDTO> showtimes = showtimesBUS.findAll();
-        RoomBUS roomBUS = new RoomBUS();
-        MovieBUS movieBUS = new MovieBUS();
-        MovieTimesBUS movieTimesBUS = new MovieTimesBUS();
-        for(ShowtimesDTO s : showtimes){
-            RoomDTO room = roomBUS.findById(s.getRoomId());
-            MovieDTO movie = movieBUS.findById(s.getMovieId());
-            MovieTimesDTO movieTimesDTO = movieTimesBUS.findById(s.getMovieTimesId());
-            tableModel.addRow(new Object[]{s.getId(), s.getShowTimesCode(), s.getProjectionDate(),
-            movieTimesDTO.getMovieTimesCode(), room.getRoomCode(), movie.getMovieCode()});
-            
-        }
-        jFrameQLLichChieu.getjTable().setModel(tableModel);
-        jFrameQLLichChieu.setVisible(true);
-    }//GEN-LAST:event_jButton6ActionPerformed
+    }//GEN-LAST:event_btXemLichChieuActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btQuanLyThongTinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btQuanLyThongTinActionPerformed
           jPanelQLThongTin.setVisible(true);
-    }//GEN-LAST:event_jButton1ActionPerformed
-
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-        // TODO add your handling code here:
-        JFrameQLPhim jFrameNhapPhim = new JFrameQLPhim();
-        DefaultTableModel model = (DefaultTableModel) jFrameNhapPhim.getjTable().getModel();
-        MovieBUS movieBUS = new MovieBUS();
-        ArrayList<MovieDTO> movies = movieBUS.findAll();
-        for (MovieDTO m : movies) {
-                    model.addRow(new Object[]{m.getId(), m.getMovieCode(), m.getMovieName(),
-                    m.getCategory(), m.getTime(), m.getProducer(), m.getShortDescription()});
-        }
-        jFrameNhapPhim.setVisible(true);
-    }//GEN-LAST:event_jButton5ActionPerformed
-
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-        // TODO add your handling code here:
-        JFrameQLGhe jFrameQLGhe = new JFrameQLGhe();
-        DefaultComboBoxModel model = new DefaultComboBoxModel();
-        ChairTypeBUS chairTypeBUS = new ChairTypeBUS();
-        for(ChairTypeDTO p : chairTypeBUS.findAll()){
-            model.addElement(p.getChairTypeCode());
-        }
-        jFrameQLGhe.getCbLoaiGhe().setModel(model);
-        jFrameQLGhe.setVisible(true);
-    }//GEN-LAST:event_jButton7ActionPerformed
+    }//GEN-LAST:event_btQuanLyThongTinActionPerformed
 
     private void btBanVeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btBanVeActionPerformed
-
         jPanelQLThongTin.setVisible(false);
         JFrameBanVe jFrameBanVe = new JFrameBanVe();
-        ChairBUS chairBUS = new ChairBUS();
-        ShowtimesBUS showtimesBUS = new ShowtimesBUS();
-        UserBUS userBUS = new UserBUS();
         DefaultComboBoxModel cbBoxModel = new DefaultComboBoxModel();
-        for(ChairDTO p : chairBUS.findAll()){
-            cbBoxModel.addElement(p.getChairCode());
+        for(ChairDTO chair : chairBUS.findAll()){
+            cbBoxModel.addElement(chair.getChairCode());
         }
         jFrameBanVe.getCbMaGhe().setModel(cbBoxModel);
         DefaultComboBoxModel cbBoxModelMaLC = new DefaultComboBoxModel();
@@ -279,7 +220,6 @@ public class JFrameMainNv extends javax.swing.JFrame {
         }
         jFrameBanVe.getCbMaLichChieu().setModel(cbBoxModelMaLC);
         jFrameBanVe.getTxtUserId().setText(txtUserId.getText()); 
-        TicketBUS ticketBUS = new TicketBUS();
         DefaultTableModel model = (DefaultTableModel) jFrameBanVe.getjTable1().getModel();
         for(TicketDTO ticket : ticketBUS.findAll()){
             model.addRow(new Object[]{ticket.getId(), chairBUS.findById(ticket.getChairId()).getChairCode(),
@@ -288,6 +228,67 @@ public class JFrameMainNv extends javax.swing.JFrame {
         jFrameBanVe.setVisible(true);
         
     }//GEN-LAST:event_btBanVeActionPerformed
+
+    private void btGheActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btGheActionPerformed
+        // TODO add your handling code here:
+        JFrameQLGhe jFrameQLGhe = new JFrameQLGhe();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for(ChairTypeDTO p : chairTypeBUS.findAll()){
+            model.addElement(p.getChairTypeCode());
+        }
+        jFrameQLGhe.getCbLoaiGhe().setModel(model);
+        DefaultTableModel tableModel = (DefaultTableModel) jFrameQLGhe.getjTable().getModel();
+        for(ChairDTO chair : chairBUS.findAll()){
+            tableModel.addRow(new Object[]{chair.getId(),chair.getChairCode(),
+                chair.getStatus(),chairTypeBUS.findById(chair.getChairTypeId()).getChairTypeCode()});
+        }
+        jFrameQLGhe.setVisible(true);
+    }//GEN-LAST:event_btGheActionPerformed
+
+    private void btLichChieuActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btLichChieuActionPerformed
+        // TODO add your handling code here:
+        JFrameQLLichChieu jFrameQLLichChieu = new JFrameQLLichChieu();
+        DefaultComboBoxModel model = new DefaultComboBoxModel();
+        for(MovieTimesDTO m : movieTimesBUS.findAll()){
+            model.addElement(m.getMovieTimesCode());
+        }
+        jFrameQLLichChieu.getCaChieu().setModel(model);
+        DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+        for(MovieDTO movie : movieBUS.findAll()){
+            model1.addElement(movie.getMovieCode());
+        }
+        jFrameQLLichChieu.getCbPhim().setModel(model1);
+        DefaultComboBoxModel model2 = new DefaultComboBoxModel();
+        for(RoomDTO room : roomBUS.findAll()){
+            model2.addElement(room.getRoomCode());
+        }
+        jFrameQLLichChieu.getCbRoom().setModel(model2);
+        DefaultTableModel tableModel = (DefaultTableModel) jFrameQLLichChieu.getjTable().getModel();
+        ArrayList<ShowtimesDTO> showtimes = showtimesBUS.findAll();
+        for(ShowtimesDTO s : showtimes){
+            RoomDTO room = roomBUS.findById(s.getRoomId());
+            MovieDTO movie = movieBUS.findById(s.getMovieId());
+            MovieTimesDTO movieTimesDTO = movieTimesBUS.findById(s.getMovieTimesId());
+            tableModel.addRow(new Object[]{s.getId(), s.getShowTimesCode(), s.getProjectionDate(),
+                movieTimesDTO.getMovieTimesCode(), room.getRoomCode(), movie.getMovieCode()});
+
+        }
+        jFrameQLLichChieu.getjTable().setModel(tableModel);
+        jFrameQLLichChieu.setVisible(true);
+    }//GEN-LAST:event_btLichChieuActionPerformed
+
+    private void btPhimActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPhimActionPerformed
+        // TODO add your handling code here:
+        JFrameQLPhim jFrameNhapPhim = new JFrameQLPhim();
+        DefaultTableModel model = (DefaultTableModel) jFrameNhapPhim.getjTable().getModel();
+        ArrayList<MovieDTO> movies = movieBUS.findAll();
+        for (MovieDTO movie : movies) {
+            model.addRow(new Object[]{movie.getId(), movie.getMovieCode(),
+                movie.getMovieName(),movie.getCategory(), movie.getTime(),
+                movie.getProducer(), movie.getShortDescription()});
+        }
+        jFrameNhapPhim.setVisible(true);
+    }//GEN-LAST:event_btPhimActionPerformed
 
     @SuppressWarnings("FieldMayBeFinal")
     private JTextField txtUserId = new JTextField();
@@ -333,12 +334,12 @@ public class JFrameMainNv extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btBanVe;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
+    private javax.swing.JButton btGhe;
+    private javax.swing.JButton btLichChieu;
+    private javax.swing.JButton btPhim;
+    private javax.swing.JButton btQuanLyThongTin;
+    private javax.swing.JButton btTimKiem;
+    private javax.swing.JButton btXemLichChieu;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanelQLThongTin;
     // End of variables declaration//GEN-END:variables

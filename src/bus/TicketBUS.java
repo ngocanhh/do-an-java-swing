@@ -31,4 +31,9 @@ public class TicketBUS {
     public ArrayList<TicketDTO> findAll(){
         return ticketDAO.findAll();
     }
+    
+    public TicketDTO findByChairIdAndShowtimesId(TicketDTO ticket){
+        return ticketDAO.findByChairIdAndShowtimesId(ticket.getChairId(), ticket.getShowtimesId());
+    }
+    
 }

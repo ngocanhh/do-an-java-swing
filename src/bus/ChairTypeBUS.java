@@ -23,6 +23,10 @@ public class ChairTypeBUS {
         chairTypeDAO = new ChairTypeDAO();
     }
     
+     public ChairTypeDTO findById(long id){
+        return chairTypeDAO.findById(id);
+    }
+    
     public ArrayList<ChairTypeDTO> findAll(){
         return chairTypeDAO.findAll();
     }
