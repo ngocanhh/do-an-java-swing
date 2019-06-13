@@ -22,7 +22,6 @@ import org.apache.commons.beanutils.BeanUtils;
  * @param <T>
  */
 public class RowMapper<T> {
-    
     @SuppressWarnings("CallToPrintStackTrace")
     public ArrayList<T> mapRow(ResultSet resultSet, Class tClass){
         ArrayList<T> listT = new ArrayList<>();
@@ -46,7 +45,7 @@ public class RowMapper<T> {
         }catch(SQLException e){
             e.printStackTrace();
         } catch (InstantiationException | IllegalAccessException | InvocationTargetException ex) {
-            Logger.getLogger(RowMapper.class.getName()).log(Level.SEVERE, null, ex);
+            System.out.println(ex.getMessage());
         }
         return listT;
     }

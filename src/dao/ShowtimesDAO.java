@@ -13,16 +13,15 @@ import dto.ShowtimesDTO;
  */
 public class ShowtimesDAO extends AbstractDAO<ShowtimesDTO>{
     
-    public long insert(ShowtimesDTO showtimes){
+    public long save(ShowtimesDTO showtimes){
         String sql = "INSERT INTO showtimes VALUES(?,?,?,?,?)";
         return insert(sql, showtimes.getShowTimesCode(), showtimes.getProjectionDate(),
                 showtimes.getMovieTimesId(), showtimes.getRoomId(), showtimes.getMovieId());
     }
     
-    public ShowtimesDTO findById(long id){
+    public ArrayList<ShowtimesDTO> findById(long id){
         String sql = "SELECT * FROM showtimes WHERE id = ?";
-        ArrayList<ShowtimesDTO> listShowtimeses = query(sql, ShowtimesDTO.class, id);
-        return listShowtimeses.isEmpty()? null : listShowtimeses.get(0);
+        return query(sql, ShowtimesDTO.class, id);
     }
     
     public ArrayList<ShowtimesDTO> findAll(){
@@ -30,10 +29,28 @@ public class ShowtimesDAO extends AbstractDAO<ShowtimesDTO>{
         return query(sql, ShowtimesDTO.class);
     }
     
+    public ArrayList<ShowtimesDTO> findByMovieId(long movieId){
+        String sql = "SELECT * FROM showtimes WHERE movieid = ?";
+        return query(sql, ShowtimesDTO.class, movieId);
+    }
+    
     public ShowtimesDTO findByCode(String showtimesCode){
         String sql = "SELECT * FROM showtimes WHERE showtimescode = ?";
         ArrayList<ShowtimesDTO> list = query(sql, ShowtimesDTO.class, showtimesCode);
         return list.isEmpty()? null : list.get(0);
+    }
+    
+    public void update(ShowtimesDTO showtimes){
+        StringBuilder sql = new StringBuilder();
+        sql.append("UPDATE showtimes SET showtimescode = ?, projectiondate = ?,");
+        sql.append("movietimesid = ?, roomid = ?, movieid = ? WHERE id = ?");
+        update(sql.toString(), showtimes.getShowTimesCode(), showtimes.getProjectionDate(),
+               showtimes.getMovieTimesId(),showtimes.getRoomId(),showtimes.getMovieId(),showtimes.getId());
+    }
+    
+    public void delete(long id){
+        String sql = "DELETE FROM showtimes WHERE id = ?";
+        update(sql, id);
     }
     
 }

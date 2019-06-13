@@ -1,9 +1,10 @@
 package dto;
 // loại ghế
 public class ChairTypeDTO {
+    
     private long id;
     private String chairTypeCode; // mã loại ghế
-    private double costOfTicket; // giá vé
+    private int costOfTicket; // giá vé
 
     public long getId() {
         return id;
@@ -21,13 +22,12 @@ public class ChairTypeDTO {
         this.chairTypeCode = chairTypeCode;
     }
 
-    public double getCostOfTicket() {
+    public int getCostOfTicket() {
         return costOfTicket;
     }
 
-    public void setCostOfTicket(double costOfTicket) {
+    public void setCostOfTicket(int costOfTicket) {
         this.costOfTicket = costOfTicket;
     }
-    
-    
+   
 }

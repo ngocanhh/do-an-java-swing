@@ -1,8 +1,14 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+
+package gui;
+
 import bus.RoleBUS;
 import bus.UserBUS;
 import dto.UserDTO;
-import gui.JFrameMainNv;
-import gui.JFrameMainQl;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
@@ -10,17 +16,20 @@ import java.awt.Font;
 import java.awt.LayoutManager;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.*;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
- * @author Personal Computer
+ * @author ADMIN
  */
-public class WindowDangNhap extends JFrame {
-
+public class WindowDangNhap extends JPanel{
+    
     private JLabel label1;
     private JLabel lbUserName;
     private JLabel lbPassword;
@@ -31,48 +40,47 @@ public class WindowDangNhap extends JFrame {
     private JPanel panel2;
     private JPanel panel1;
     private JPanel panelTotal;
+    private FrameMain frameMain;
     
-    public WindowDangNhap() throws IOException{
-        setTitle("Quản lý bán vé xem phim");
+    public WindowDangNhap(FrameMain frameMain){
         setSize(1600, 800);
-        setLocationRelativeTo(null);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.frameMain = frameMain;
         initComponents();
     }
     
-    @SuppressWarnings("Convert2Lambda")
-    private void initComponents() throws IOException {
+     @SuppressWarnings("Convert2Lambda")
+    private void initComponents(){
         panel2 = new JPanel();
         panel2.setLayout(null);
         panel2.setPreferredSize(new Dimension(500,800));
         panel2.setBackground(new Color(230, 243, 255));
         
-        label1 = new JLabel(" Sign-in ");
-        label1.setBounds(180, 50, 160, 50);
+        label1 = new JLabel("Đăng nhập");
+        label1.setBounds(160, 50, 300, 50);
         label1.setFont(new Font("Serif", Font.HANGING_BASELINE, 40));
         panel2.add(label1);
 
-        lbUserName = new JLabel(" Username ");
-        lbUserName.setBounds(25, 130, 150, 30);
+        lbUserName = new JLabel("Tên đăng nhập" );
+        lbUserName.setBounds(25, 130, 250, 30);
         lbUserName.setFont(new Font("Serif", Font.PLAIN, 20));
         panel2.add(lbUserName);
         
-        lbPassword = new JLabel(" Password ");
+        lbPassword = new JLabel(" Mật khẩu ");
         lbPassword.setBounds(25, 220, 150, 30);
         lbPassword.setFont(new Font("Serif", Font.PLAIN, 20));
         panel2.add(lbPassword);
 
         txtUserName = new JTextField(30);
         txtUserName.setBounds(30, 170, 450, 40);
-        txtUserName.setFont(new Font(null, NORMAL, 16));
+        txtUserName.setFont(new Font(null, Font.PLAIN, 16));
         panel2.add(txtUserName);
 
         txtPassword = new JPasswordField(30);
         txtPassword.setBounds(30, 260, 450, 40);
-        txtPassword.setFont(new Font(null, NORMAL, 16));
+        txtPassword.setFont(new Font(null, Font.BOLD, 16));
         panel2.add(txtPassword);
 
-        btConnect = new JButton("Connect");
+        btConnect = new JButton("Đăng nhập");
         btConnect.setFont(new Font("Serif", Font.BOLD, 25));
         btConnect.setBackground(new Color(51, 153, 255));
         btConnect.setForeground(Color.white);      
@@ -80,6 +88,7 @@ public class WindowDangNhap extends JFrame {
         btConnect.setBounds(170, 340, 150, 50);
         btConnect.addActionListener(new ActionListener() {
             @Override
+            // xử lý sự kiện
             public void actionPerformed(ActionEvent evt) {
                 btConnectActionPerformed();
             }
@@ -90,6 +99,7 @@ public class WindowDangNhap extends JFrame {
         lbThumb = new JLabel();
         lbThumb.setIcon(icon);
         panel1 = new JPanel();
+        panel1.setPreferredSize(new Dimension(1100,800));
         panel1.add(lbThumb);
                 
         panelTotal = new JPanel((LayoutManager) new BorderLayout());       
@@ -97,7 +107,7 @@ public class WindowDangNhap extends JFrame {
         panelTotal.add(panel2,BorderLayout.EAST);
         add(panelTotal);
     }
-
+    
     @SuppressWarnings("ConvertToStringSwitch")
     private void btConnectActionPerformed(){
         UserDTO userDTO = new UserDTO();
@@ -109,39 +119,18 @@ public class WindowDangNhap extends JFrame {
         if(userDTO != null){
             userDTO.setRoleDTO(roleBUS.findById(userDTO.getRoleId()));
             if(userDTO.getRoleDTO().getCode().equals("quan-ly")){
-                JFrameMainQl jFrameMainQl = new JFrameMainQl();
-                jFrameMainQl.setVisible(true);
                 this.setVisible(false);
+                WindowForQuanLy windowForQuanLy = new WindowForQuanLy(frameMain);
+                frameMain.add(windowForQuanLy);
             }else if(userDTO.getRoleDTO().getCode().equals("nhan-vien")){
-                JFrameMainNv jFrameMainNv = new JFrameMainNv();
-                Long userId = userDTO.getId();
-                String userId1 = userId.toString();
-                JTextField txtUserId = new JTextField();
-                txtUserId.setText(userId1);
-                jFrameMainNv.getTxtUserId().setText(userId1);
-                jFrameMainNv.add(jFrameMainNv.getTxtUserId());
                 this.setVisible(false);
-                jFrameMainNv.setVisible(true);
+                WindowForNhanVien windowForNhanVien = new WindowForNhanVien(frameMain);
+                windowForNhanVien.setUserId(userDTO.getId());
+                frameMain.add(windowForNhanVien);
             }
         }else{
-            JOptionPane.showMessageDialog(rootPane, "Đăng nhập không thành công!");
+            JOptionPane.showMessageDialog(btConnect, "Không thể đăng nhập");
         }
     }
-     
-    public static void main(String[] args) throws IOException {
-        try {
-            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException | InstantiationException |
-                IllegalAccessException | UnsupportedLookAndFeelException ex) {
-            Logger.getLogger(WindowDangNhap.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        WindowDangNhap windowDangNhap = new WindowDangNhap();
-        windowDangNhap.setVisible(true);
-    }
-
+    
 }

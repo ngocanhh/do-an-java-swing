@@ -157,7 +157,7 @@ public class AbstractDAO<T> {
         try{
             connection = getConnection();
             connection.setAutoCommit(false);
-            statement = connection.prepareCall(sql);
+            statement = connection.prepareStatement(sql);
             setParameter(statement, parameters);
             statement.executeUpdate();
             connection.commit();

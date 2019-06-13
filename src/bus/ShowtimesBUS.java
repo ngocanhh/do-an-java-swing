@@ -24,8 +24,8 @@ public class ShowtimesBUS {
     }
     
     public ShowtimesDTO save(ShowtimesDTO showtimes){
-        showtimes.setId(showtimesDAO.insert(showtimes));
-        return showtimesDAO.findById(showtimes.getId());
+        showtimes.setId(showtimesDAO.save(showtimes));
+        return findById(showtimes.getId());
     }
     
     public ArrayList<ShowtimesDTO> findAll(){
@@ -37,7 +37,20 @@ public class ShowtimesBUS {
     }
     
     public ShowtimesDTO findById(long id){
-        return showtimesDAO.findById(id);
+        ArrayList<ShowtimesDTO> listShowtimes = showtimesDAO.findById(id);
+        return listShowtimes.isEmpty()? null : listShowtimes.get(0);
     }
     
+    public ShowtimesDTO update(ShowtimesDTO showtimes){
+        showtimesDAO.update(showtimes);
+        return findById(showtimes.getId());
+    }
+    
+    public void delete(ShowtimesDTO showtimes){
+        showtimesDAO.delete(showtimes.getId());
+    }
+    
+    public ArrayList<ShowtimesDTO> findByMovieId(long movieId){
+        return  showtimesDAO.findByMovieId(movieId);
+    }
 }
